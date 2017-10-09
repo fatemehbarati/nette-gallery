@@ -1,5 +1,6 @@
 services:
 	router: App\RouterFactory::createRouter
+	security.authenticator: App\Model\MyAuthenticator
 
 	- App\AdminModule\Forms\SignInForm
 

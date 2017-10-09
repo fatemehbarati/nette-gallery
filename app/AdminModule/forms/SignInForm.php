@@ -4,6 +4,7 @@ namespace App\AdminModule\Forms;
 use App\AdminModule\Forms\Interfaces\ISignInFormFactory;
 use Nette\Application\Application;
 use Nette\Application\UI\Form;
+use Nette\Security\AuthenticationException;
 
 class SignInForm implements ISignInFormFactory
 {
@@ -37,6 +38,13 @@ class SignInForm implements ISignInFormFactory
 
     public function signInOnSucceeded(Form $form, $values)
     {
-        $this->application->getPresenter()->redirect(':Front:Homepage:');
+        try{
+            $this->application->getPresenter()->getUser()->login($values->username, $values->password);
+            $this->application->getPresenter()->redirect(':Admin:Homepage:');
+        }catch (AuthenticationException $exception){
+            $form->addError($exception->getMessage());
+//            $form->addError('Username or Password is not correct!');
+        }
+//        $this->application->getPresenter()->redirect(':Front:Homepage:');
     }
 }

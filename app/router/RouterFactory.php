@@ -18,16 +18,16 @@ class RouterFactory
 	{
 		$router = new RouteList;
 
-        $list = new RouteList();
-        $list[] = new Route('<presenter>/<action>[/<id>]', 'Front:Homepage:default');
-        $router[] = $list;
-
         $list = new RouteList('Front');
         $list[] = new Route('Front/<presenter>/<action>[/<id>]', 'Homepage:default');
         $router[] = $list;
 
         $list = new RouteList('Admin');
         $list[] = new Route('Admin/<presenter>/<action>[/<id>]', 'Sign:in');
+        $router[] = $list;
+
+        $list = new RouteList();
+        $list[] = new Route('<presenter>/<action>[/<id>]', 'Front:Homepage:default');
         $router[] = $list;
 
 		return $router;
