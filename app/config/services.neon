@@ -1,0 +1,19 @@
+services:
+	router: App\RouterFactory::createRouter
+
+	- App\AdminModule\Forms\SignInForm
+
+	gallery.repo.product:
+	    class: App\Model\Entity\Repository\ProductRepository
+	    tags:
+	        doctrine.repositoryEntity: App\Model\Entity\Product
+
+	gallery.repo.product_group:
+	    class: App\Model\Entity\Repository\ProductGroupRepository
+	    tags:
+	        doctrine.repositoryEntity: App\Model\Entity\ProductGroup
+
+	gallery.repo.group:
+	    class: App\Model\Entity\Repository\GroupRepository
+	    tags:
+	        doctrine.repositoryEntity: App\Model\Entity\Group

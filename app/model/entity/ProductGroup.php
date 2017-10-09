@@ -19,25 +19,34 @@ class ProductGroup
      */
     private $id;
 
-    /**
-     * @ORM\Column(type="string")
-     */
-    private $name;
+
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="integer")
+     */
+    private $product_id;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $group_id;
+
+    /**
+     * @ORM\Column(type="integer")
      */
     private $created_at;
 
     /**
-     * @ORM\OneToMany(targetEntity="Product", mappedBy="group")
+     * @ORM\ManyToOne(targetEntity="Group", inversedBy="productGroupsGroup")
+     * @ORM\JoinColumn(name="group_id", referencedColumnName="id")
      */
-    private $products;
-
-    public function __construct()
-    {
-        $this->products = new ArrayCollection();
-    }
+    public $group;
+//
+    /**
+     * @ORM\ManyToOne(targetEntity="Product", inversedBy="productGroups")
+     * @ORM\JoinColumn(name="product_id", referencedColumnName="id")
+     */
+    private $product;
 
     /**
      * @return integer
@@ -56,19 +65,35 @@ class ProductGroup
     }
 
     /**
-     * @return string
+     * @return integer
      */
-    public function getName()
+    public function getProductId()
     {
-        return $this->name;
+        return $this->product_id;
     }
 
     /**
-     * @param string $name
+     * @param integer $product_id
      */
-    public function setName($name)
+    public function setProductId($product_id)
     {
-        $this->name = $name;
+        $this->product_id = $product_id;
+    }
+
+    /**
+     * @return integer
+     */
+    public function getGroupId()
+    {
+        return $this->group_id;
+    }
+
+    /**
+     * @param integer $group_id
+     */
+    public function setGroupId($group_id)
+    {
+        $this->group_id = $group_id;
     }
 
     /**
@@ -85,6 +110,13 @@ class ProductGroup
     public function setCreatedAt($created_at)
     {
         $this->created_at = $created_at;
+    }
+
+    public function getProduct(){
+        return $this->product;
+    }
+    public function getGroup(){
+        return $this->group;
     }
 
 }

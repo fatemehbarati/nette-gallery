@@ -1,19 +1,17 @@
+includes:
+    - services.neon
+
 parameters:
 
 
 application:
 	errorPresenter: Error
 	mapping:
-		*: App\*\Presenters\*Presenter
+		*: App\*Module\Presenters\*Presenter
 
 
 session:
 	expiration: 14 days
-
-
-services:
-	router: App\RouterFactory::createRouter
-
 
 database:
     dsn: 'mysql:host=127.0.0.1;dbname=nette-gallery'

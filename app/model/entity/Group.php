@@ -4,13 +4,12 @@ namespace App\Model\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Nette\Utils\DateTime;
-use Symfony\Component\Console\Input\StreamableInputInterface;
 
 /**
- * @ORM\Entity(repositoryClass="App\Model\Entity\Repository\ProductRepository")
- * @ORM\Table(name="products")
+ * @ORM\Entity(repositoryClass="App\Model\Entity\Repository\GroupRepository")
+ * @ORM\Table(name="groups")
  */
-class Product
+class Group
 {
 
     /**
@@ -26,27 +25,17 @@ class Product
     private $name;
 
     /**
-     * @ORM\Column(type="text")
-     */
-    private $description;
-
-    /**
-     * @ORM\Column(type="integer", columnDefinition="ENUM(0, 1)")
-     */
-    private $active = 1;
-
-    /**
      * @ORM\Column(type="datetime")
      */
     private $created_at;
 
     /**
-    * @ORM\OneToMany(targetEntity="ProductGroup", mappedBy="product")
+     * @ORM\OneToMany(targetEntity="ProductGroup", mappedBy="group")
     */
-    private $productGroups;
+    private $productGroupsGroup;
 
     public function __construct() {
-        $this->productGroups = new ArrayCollection();
+        $this->productGroupsGroup = new ArrayCollection();
     }
 
     /**
@@ -82,38 +71,6 @@ class Product
     }
 
     /**
-     * @return string
-     */
-    public function getDescription()
-    {
-        return $this->description;
-    }
-
-    /**
-     * @param string $description
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
-    }
-
-    /**
-     * @return integer
-     */
-    public function getActive()
-    {
-        return $this->active;
-    }
-
-    /**
-     * @param integer $active
-     */
-    public function setActive($active)
-    {
-        $this->active = $active;
-    }
-
-    /**
      * @return DateTime
      */
     public function getCreatedAt()
@@ -129,11 +86,8 @@ class Product
         $this->created_at = $created_at;
     }
 
-    public function getProductGroups(){
-        return $this->productGroups;
-    }
-    public function setProductGroups($productGroups){
-        $this->productGroups = $productGroups;
+    public function getProductGroupsGroup(){
+        return $this->productGroupsGroup;
     }
 
 }
