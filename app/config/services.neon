@@ -3,6 +3,7 @@ services:
 	security.authenticator: App\Model\MyAuthenticator
 
 	- App\AdminModule\Forms\SignInForm
+	- App\AdminModule\Forms\ProductForm
 
 	gallery.repo.product:
 	    class: App\Model\Entity\Repository\ProductRepository
@@ -18,3 +19,8 @@ services:
 	    class: App\Model\Entity\Repository\GroupRepository
 	    tags:
 	        doctrine.repositoryEntity: App\Model\Entity\Group
+
+#	gallery.form.product:
+#	    class: App\AdminModule\Forms\ProductForm
+#	    tags:
+#	        - App\Model\Entity\Repository\GroupRepository

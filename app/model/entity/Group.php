@@ -31,7 +31,7 @@ class Group
 
     /**
      * @ORM\OneToMany(targetEntity="ProductGroup", mappedBy="group")
-    */
+     */
     private $productGroupsGroup;
 
     public function __construct() {
