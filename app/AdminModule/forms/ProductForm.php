@@ -6,19 +6,18 @@ use App\AdminModule\Forms\Interfaces\IProductFormFactory;
 use App\Model\Entity\Repository\GroupRepository;
 use App\Model\Entity\Repository\ProductGroupRepository;
 use App\Model\Entity\Repository\ProductRepository;
+use App\Model\ProductModel;
 use Nette\Application\UI\Form;
 
 class ProductForm implements IProductFormFactory
 {
 
-    /** @var GroupRepository @inject */
-    public $groupRepo;
-
-
     /** @param GroupRepository $groupRepo */
-    public function __construct(GroupRepository $groupRepo)
+    /** @param ProductModel $productModel */
+    public function __construct(GroupRepository $groupRepo, ProductModel $productModel)
     {
         $this->groupRepo = $groupRepo;
+        $this->productModel = $productModel;
     }
 
 
@@ -38,10 +37,20 @@ class ProductForm implements IProductFormFactory
         $form->addText('name', 'Product Name : ')
             ->setRequired('Please enter a name for product;');
 
-        $form->addSelect('productGroups', 'Group of Product:', $groups)->setPrompt('test');
+        $form->addTextArea('description', 'Product Description : ');
+
+        $form->addMultiSelect('productGroups', 'Group of Product:', $groups);
 
         $form->addSubmit('save', 'Create new product');
 
+        $form->onSuccess[] = [$this, 'submitProductFormSucceeded'];
+
         return $form;
+    }
+
+    public function submitProductFormSucceeded(Form $form, $values)
+    {
+
+        $this->productModel->addNewProduct($values);
     }
 }

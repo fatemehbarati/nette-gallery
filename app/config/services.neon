@@ -4,6 +4,7 @@ services:
 
 	- App\AdminModule\Forms\SignInForm
 	- App\AdminModule\Forms\ProductForm
+	- App\Model\ProductModel
 
 	gallery.repo.product:
 	    class: App\Model\Entity\Repository\ProductRepository

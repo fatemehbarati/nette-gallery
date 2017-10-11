@@ -119,4 +119,8 @@ class ProductGroup
         return $this->group;
     }
 
+    public function setGroup($group){
+        $this->group = $group;
+    }
+
 }
