@@ -1,3 +1,37 @@
 {block content}
-    {control productForm}
+    {include '../leftMenu.latte'}
+
+    <div class="col-md-8 col-md-offset-2 main">
+    {form productForm class => 'form-horizontal'}
+        <div class="form-group">
+          {*<label class="control-label col-sm-2" for="email">Email:</label>*}
+            {label name class => 'control-label col-sm-2' /}
+          <div class="col-sm-10">
+            {*<input type="email" class="form-control" id="email" placeholder="Enter email" name="email">*}
+              {input name class => 'form-control'}
+          </div>
+        </div>
+        <div class="form-group">
+          {*<label class="control-label col-sm-2" for="pwd">Password:</label>*}
+            {label productGroups class => 'control-label col-sm-2' /}
+          <div class="col-sm-10">
+            {*<input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd">*}
+              {input productGroups class => 'form-control'}
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-5">
+            {*<button type="submit" class="btn btn-default">Submit</button>*}
+              {input save class => 'btn btn-lg btn-primary btn-block'}
+          </div>
+        </div>
+        {*<h2 class="form-signin-heading">Please sign in</h2>*}
+        {*{label name class => 'sr-only' /} {input name class => 'form-control'}*}
+        {*{label productGroups class => 'sr-only' /} {input productGroups class => 'form-control'}*}
+        {*{input save class => 'btn btn-lg btn-primary btn-block'}*}
+    {/form}
+    </div>
+
+
+    {*{control productForm}*}
 {/block}

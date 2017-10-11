@@ -40,6 +40,8 @@ class ProductForm implements IProductFormFactory
 
         $form->addSelect('productGroups', 'Group of Product:', $groups)->setPrompt('test');
 
+        $form->addSubmit('save', 'Create new product');
+
         return $form;
     }
 }
