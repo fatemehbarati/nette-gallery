@@ -2,9 +2,13 @@ services:
 	router: App\RouterFactory::createRouter
 	security.authenticator: App\Model\MyAuthenticator
 
+	cacheStorage:
+	    factory: Nette\Caching\Storages\DevNullStorage
+
 	- App\AdminModule\Forms\SignInForm
 	- App\AdminModule\Forms\ProductForm
 	- App\Model\ProductModel
+	- App\Model\GroupModel
 
 	gallery.repo.product:
 	    class: App\Model\Entity\Repository\ProductRepository
@@ -20,8 +24,3 @@ services:
 	    class: App\Model\Entity\Repository\GroupRepository
 	    tags:
 	        doctrine.repositoryEntity: App\Model\Entity\Group
-
-#	gallery.form.product:
-#	    class: App\AdminModule\Forms\ProductForm
-#	    tags:
-#	        - App\Model\Entity\Repository\GroupRepository

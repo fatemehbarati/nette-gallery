@@ -8,16 +8,24 @@ class ProductModel
 {
 
     /** @param $productRepo ProductRepository */
-    public function __construct(ProductRepository $productRepo)
+    /** @param $groupModel GroupModel */
+    public function __construct(ProductRepository $productRepo, GroupModel $groupModel)
     {
 
         $this->productRepo = $productRepo;
+        $this->groupModel = $groupModel;
     }
 
     public function addNewProduct($values)
     {
 
-        $this->productRepo->add($values);
-        var_dump($values);exit;
+        $tmpProductGroups = $values['productGroups'];
+        $groups = array();
+        foreach ($tmpProductGroups as $productGroupId) {
+
+            $groups[] = $this->groupModel->getGroupById($productGroupId);
+        }
+
+        $this->productRepo->add($values, $groups);
     }
 }

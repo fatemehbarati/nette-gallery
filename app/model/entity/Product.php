@@ -41,12 +41,30 @@ class Product
     private $created_at;
 
     /**
-    * @ORM\OneToMany(targetEntity="ProductGroup", mappedBy="product")
-    */
-    private $productGroups;
+     * Many Users have Many Groups.
+     * @ORM\ManyToMany(targetEntity="Group", inversedBy="products")
+     * @ORM\JoinTable(name="product_group",
+     *      joinColumns={
+     *          @ORM\JoinColumn(name="product_id", referencedColumnName="id")
+     *      },
+     *      inverseJoinColumns={
+     *          @ORM\JoinColumn(name="group_id", referencedColumnName="id")
+     *      }
+     *   )
+     */
+    private $groups;
 
-    public function __construct() {
-        $this->productGroups = new ArrayCollection();
+    public function __construct()
+    {
+
+        $this->groups = new ArrayCollection();
+    }
+
+    public function addProductGroups(Group $group)
+    {
+        $this->groups[] = $group;
+
+        return $this;
     }
 
     /**
@@ -132,6 +150,7 @@ class Product
     public function getProductGroups(){
         return $this->productGroups;
     }
+
     public function setProductGroups($productGroups){
         $this->productGroups = $productGroups;
     }

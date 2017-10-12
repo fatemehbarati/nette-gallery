@@ -7,30 +7,31 @@ use App\Model\Entity\Repository\GroupRepository;
 use App\Model\Entity\Repository\ProductGroupRepository;
 use App\Model\Entity\Repository\ProductRepository;
 use App\Model\ProductModel;
+use Nette\Application\Application;
 use Nette\Application\UI\Form;
+use Nette\Neon\Exception;
 
 class ProductForm implements IProductFormFactory
 {
 
-    /** @param GroupRepository $groupRepo */
-    /** @param ProductModel $productModel */
-    public function __construct(GroupRepository $groupRepo, ProductModel $productModel)
+    /** @param $application Application */
+    /** @param $groupRepo GroupRepository */
+    /** @param $productModel ProductModel */
+    public function __construct(Application $application, GroupRepository $groupRepo, ProductModel $productModel)
     {
+
+        $this->application = $application;
         $this->groupRepo = $groupRepo;
         $this->productModel = $productModel;
     }
-
 
     public function create()
     {
         $groupsOfProducts = $this->groupRepo->findAll();
 
-        $groups[0] = 'select Group';
-
         foreach ($groupsOfProducts as $groupsOfProduct) {
             $groups[ $groupsOfProduct->getId() ] = $groupsOfProduct->getName();
         }
-//        var_dump($groupsOfProducts);exit;
 
         $form = new Form();
 
@@ -52,5 +53,7 @@ class ProductForm implements IProductFormFactory
     {
 
         $this->productModel->addNewProduct($values);
+        $this->application->getPresenter()->redirect("Product:new");
     }
+
 }

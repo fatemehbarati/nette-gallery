@@ -43,8 +43,6 @@ class SignInForm implements ISignInFormFactory
             $this->application->getPresenter()->redirect(':Admin:Homepage:');
         }catch (AuthenticationException $exception){
             $form->addError($exception->getMessage());
-//            $form->addError('Username or Password is not correct!');
         }
-//        $this->application->getPresenter()->redirect(':Front:Homepage:');
     }
 }

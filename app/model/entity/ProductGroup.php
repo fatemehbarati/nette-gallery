@@ -19,8 +19,6 @@ class ProductGroup
      */
     private $id;
 
-
-
     /**
      * @ORM\Column(type="integer")
      */
@@ -35,18 +33,6 @@ class ProductGroup
      * @ORM\Column(type="integer")
      */
     private $created_at;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Group", inversedBy="productGroupsGroup")
-     * @ORM\JoinColumn(name="group_id", referencedColumnName="id")
-     */
-    public $group;
-//
-    /**
-     * @ORM\ManyToOne(targetEntity="Product", inversedBy="productGroups")
-     * @ORM\JoinColumn(name="product_id", referencedColumnName="id")
-     */
-    private $product;
 
     /**
      * @return integer
@@ -110,17 +96,6 @@ class ProductGroup
     public function setCreatedAt($created_at)
     {
         $this->created_at = $created_at;
-    }
-
-    public function getProduct(){
-        return $this->product;
-    }
-    public function getGroup(){
-        return $this->group;
-    }
-
-    public function setGroup($group){
-        $this->group = $group;
     }
 
 }

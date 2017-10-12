@@ -17,28 +17,22 @@ class SignPresenter extends Presenter
     public function createComponentSignInAdmin()
     {
 
-//        if($this->getUser()->loggedIn){
-//            $this->redirect(':Admin:Homepage:');
-//        }
-//        else
-//        {
-            $form = $this->signInForm->create();
-
-            return $form;
-//        }
+        $form = $this->signInForm->create();
+        return $form;
     }
 
     public function actionOut(){
+
         $this->getUser()->logout();
-        $this->flashMessage('You have been signed out.');
+        $this->flashMessage('You have been signed out.', 'sign_info');
         $this->redirect(':Admin:Sign:in');
     }
 
-    public function renderIn()
-    {
-        if($this->getUser()->loggedIn){
-            $this->redirect(':Admin:Homepage:');
-        }
-    }
+//    public function renderIn()
+//    {
+//        if($this->getUser()->loggedIn){
+//            $this->redirect(':Admin:Homepage:');
+//        }
+//    }
 
 }

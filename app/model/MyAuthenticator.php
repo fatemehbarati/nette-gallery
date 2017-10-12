@@ -1,13 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: muhammad
- * Date: 9/28/2017
- * Time: 9:01 AM
- */
-
 namespace App\Model;
-
 
 use Nette\Database\Context;
 use Nette\Security\AuthenticationException;
@@ -27,6 +19,7 @@ class MyAuthenticator implements IAuthenticator
     }
 
     function authenticate(array $credentials) {
+
         list($username, $password) = $credentials;
 
         $row = $this->database->table('users')->where('username', $username)->fetch();
@@ -39,11 +32,6 @@ class MyAuthenticator implements IAuthenticator
 
             throw new AuthenticationException('Invalid password');
         }
-
-//        if(!Passwords::verify($password, $row->password)){
-//
-//            throw new AuthenticationException('Invalid password');
-//        }
 
         return new Identity($row->id, '', ['username' => $row->username]);
     }

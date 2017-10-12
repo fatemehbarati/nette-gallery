@@ -1,6 +1,17 @@
 {block content}
 
     {form signInAdmin class => 'form-signin'}
+
+        {foreach $flashes as $flash}
+            {if $flash->type  == "sign_info"}
+                <div n:class="flash, $flash->type">{$flash->message}</div>
+            {/if}
+        {/foreach}
+
+        <ul class="error" n:if="$form->hasErrors()">
+            <li n:foreach="$form->errors as $error">{$error}</li>
+        </ul>
+
         <h2 class="form-signin-heading">Please sign in</h2>
         {label username class => 'sr-only' /} {input username class => 'form-control'}
         {label password class => 'sr-only' /} {input password class => 'form-control'}

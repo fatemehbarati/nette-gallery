@@ -30,12 +30,20 @@ class Group
     private $created_at;
 
     /**
-     * @ORM\OneToMany(targetEntity="ProductGroup", mappedBy="group")
+     * Many Groups have Many Users.
+     * @ORM\ManyToMany(targetEntity="Product", mappedBy="groups")
      */
-    private $productGroupsGroup;
+    private $products;
 
     public function __construct() {
-        $this->productGroupsGroup = new ArrayCollection();
+
+        $this->products = new ArrayCollection();
+    }
+
+    public function addUser(Product $product)
+    {
+        $this->products[] = $product;
+        return $this;
     }
 
     /**
@@ -86,8 +94,12 @@ class Group
         $this->created_at = $created_at;
     }
 
-    public function getProductGroupsGroup(){
-        return $this->productGroupsGroup;
+    /**
+     * @return ArrayCollection
+     */
+    public function getProducts()
+    {
+        return $this->products;
     }
 
 }
