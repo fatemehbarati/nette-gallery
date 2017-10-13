@@ -7,9 +7,11 @@
             <div class="col-md-4 grid-col">Product Groups</div>
             <div class="col-md-4 grid-col">Operation</div>
         </div>
-        <div n:foreach="$products as $product" class="row">
+        <div n:foreach="$products as $product" class="row display-flex">
             <div class="col-md-4 grid-col">{$product->getName()}</div>
-            <div class="col-md-4 grid-col">test</div>
+            <div class="col-md-4 grid-col">
+                <div n:foreach="$product->getGroups() as $productGroup">{$productGroup->getName()}</div>
+            </div>
             <div class="col-md-4 grid-col">
                 <a n:href="edit $product->getId()">Edit</a>
             </div>
