@@ -5,7 +5,7 @@
     {form productForm class => 'form-horizontal'}
 
         {foreach $flashes as $flash}
-            {if $flash->type  == "product_new_info"}
+            {if $flash->type  == "product_edit_info"}
                 <div n:class="flash, $flash->type">{$flash->message}</div>
             {/if}
         {/foreach}
@@ -34,7 +34,7 @@
         </div>
         <div class="form-group">
           <div class="col-sm-offset-3 col-sm-3">
-              {input save class => 'btn btn-lg btn-primary btn-block'}
+              {input save class => 'btn btn-lg btn-primary btn-block', value => 'edit'}
           </div>
         </div>
     {/form}

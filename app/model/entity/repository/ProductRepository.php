@@ -31,4 +31,11 @@ class ProductRepository extends EntityRepository
         $this->_em->persist($product);
         $this->_em->flush();
     }
+
+    public function persist($product)
+    {
+
+        $this->_em->persist($product);
+        $this->_em->flush();
+    }
 }

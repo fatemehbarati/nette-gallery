@@ -52,8 +52,20 @@ class ProductForm implements IProductFormFactory
     public function submitProductFormSucceeded(Form $form, $values)
     {
 
-        $this->productModel->addNewProduct($values);
-        $this->application->getPresenter()->redirect("Product:new");
+        $productId = $this->application->getPresenter()->getParameter('productId');
+        if( $productId )
+        {
+            $this->productModel->updateWithId($productId, $values);
+            $this->application->getPresenter()->flashMessage('Edit Product Succeeded!', 'product_edit_info');
+            $this->application->getPresenter()->redirect("this");
+        }
+        else
+        {
+
+            $this->productModel->addNewProduct($values);
+            $this->application->getPresenter()->flashMessage('Create Product Succeeded!', 'product_new_info');
+            $this->application->getPresenter()->redirect("Product:new");
+        }
     }
 
 }

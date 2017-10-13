@@ -147,12 +147,29 @@ class Product
         $this->created_at = $created_at;
     }
 
-    public function getProductGroups(){
-        return $this->productGroups;
+    public function getGroups(){
+        return $this->groups;
     }
 
-    public function setProductGroups($productGroups){
-        $this->productGroups = $productGroups;
+    public function setGroups($groups) {
+
+        $currentGroups = $this->getGroups();
+
+        foreach($currentGroups as $group) {
+            $groupId = $group->getId();
+            if(!isset($groups[ $groupId ])) {
+
+                $this->groups->remove($groupId);
+            }
+            else {
+
+                unset($groups[$groupId]);
+            }
+        }
+
+        foreach($groups as $id => $group) {
+            $this->groups[$id] = $group;
+        }
     }
 
 }

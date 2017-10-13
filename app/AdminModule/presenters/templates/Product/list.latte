@@ -1,0 +1,24 @@
+{block content}
+    {include '../leftMenu.latte'}
+
+    <div class="col-md-8 col-md-offset-2 main">
+        <div class="row header">
+            <div class="col-md-4 grid-col">Product Name</div>
+            <div class="col-md-4 grid-col">Product Groups</div>
+            <div class="col-md-4 grid-col">Operation</div>
+        </div>
+        <div n:foreach="$products as $product" class="row">
+            <div class="col-md-4 grid-col">{$product->getName()}</div>
+            <div class="col-md-4 grid-col">test</div>
+            <div class="col-md-4 grid-col">
+                <a n:href="edit $product->getId()">Edit</a>
+            </div>
+        </div>
+
+        <br>
+        <div class="row">
+            <a n:href="new">Create New Product</a>
+        </div>
+    </div>
+
+{/block}
