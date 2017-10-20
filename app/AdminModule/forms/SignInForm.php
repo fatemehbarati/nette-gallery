@@ -10,9 +10,12 @@ use Nette\Security\AuthenticationException;
 class SignInForm extends Object implements ISignInFormFactory
 {
 
-    /** @param $application Application */
+    /** @var Application */
+    public $application;
+
     public function __construct(Application $application)
     {
+
         $this->application = $application;
     }
 

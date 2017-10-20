@@ -9,17 +9,16 @@ use Nette\Application\UI\Presenter;
 class ProductPresenter extends Presenter
 {
 
-    /** @var ProductForm @inject */
-    public $productForm;
-
     /** @var ProductModel @inject */
     public $productModel;
+
+    /** @var ProductForm @inject */
+    public $productForm;
 
     public function createComponentProductForm()
     {
 
         $form = $this->productForm->create();
-
         return $form;
     }
 

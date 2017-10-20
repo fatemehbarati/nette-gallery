@@ -24,3 +24,5 @@ services:
 	    class: App\Model\Entity\Repository\GroupRepository
 	    tags:
 	        doctrine.repositoryEntity: App\Model\Entity\Group
+
+#	- {class: App\AdminModule\Forms\ProductForm, tags: [groupRepo: App\Model\Entity\Repository\GroupRepository, productModel: App\Model\ProductModel]}

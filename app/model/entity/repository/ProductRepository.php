@@ -8,6 +8,7 @@ use App\Model\GroupModel;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Mapping;
+use Nette\Utils\Image;
 
 class ProductRepository extends EntityRepository
 {
@@ -23,6 +24,13 @@ class ProductRepository extends EntityRepository
         $product = new Product();
         $product->setName($values['name']);
         $product->setDescription($values['description']);
+
+        if($values->image->name)
+        {
+//            $image = Image::fromFile($values['image']);
+//            var_dump('/www/temp/' . $values->image->name);exit;
+            $values->image->move('./uploadedImages/' . $values->image->name);exit;
+        }
 
         foreach ($newProductGroups as $newProductGroup) {
             $product->addProductGroups($newProductGroup);
