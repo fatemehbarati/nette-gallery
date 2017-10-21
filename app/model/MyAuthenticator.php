@@ -18,6 +18,11 @@ class MyAuthenticator implements IAuthenticator
         $this->database = $database;
     }
 
+    /**
+     * @param array $credentials
+     * @return Identity
+     * @throws AuthenticationException
+     */
     function authenticate(array $credentials) {
 
         list($username, $password) = $credentials;

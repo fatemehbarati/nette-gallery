@@ -28,6 +28,9 @@ class ProductRepository extends EntityRepository
             $product->addProductGroups($newProductGroup);
         }
 
+//        $values->image->move($values['uploadFileDirectory'] . $values->image->name);
+//        $product->setImage($values->image);
+
         $this->_em->persist($product);
         $this->_em->flush();
     }

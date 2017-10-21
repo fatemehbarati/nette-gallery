@@ -2,18 +2,20 @@
 namespace App\AdminModule\Forms;
 
 use App\AdminModule\Forms\Interfaces\ISignInFormFactory;
+use App\AdminModule\Presenters\SignPresenter;
 use Nette\Application\Application;
+use Nette\Application\UI\Control;
 use Nette\Application\UI\Form;
 use Nette\Object;
 use Nette\Security\AuthenticationException;
 
-class SignInForm extends Object implements ISignInFormFactory
+//class SignInForm extends Object implements ISignInFormFactory
+class SignInForm extends Control
 {
 
-    /** @param $application Application */
-    public function __construct(Application $application)
+    public function __construct(SignPresenter $presenter)
     {
-        $this->application = $application;
+        parent::__construct($presenter, 'SignInForm');
     }
 
     /** @var  array */
@@ -40,13 +42,18 @@ class SignInForm extends Object implements ISignInFormFactory
         return $form;
     }
 
+    /**
+     * @param Form $form
+     * @param $values
+     */
     public function signInOnSucceeded(Form $form, $values)
     {
         try{
 
-            $this->application->getPresenter()->getUser()->login($values->username, $values->password);
+            $this->presenter->getUser()->login($values->username, $values->password);
+
             $this->onSuccess($values->username, $values->password);
-            $this->application->getPresenter()->redirect(':Admin:Homepage:');
+            $this->presenter->redirect(':Admin:Homepage:');
         }catch (AuthenticationException $exception){
 
             $form->addError($exception->getMessage());

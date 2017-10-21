@@ -3,28 +3,33 @@ namespace App\AdminModule\Forms;
 
 
 use App\AdminModule\Forms\Interfaces\IProductFormFactory;
+use App\AdminModule\Presenters\ProductPresenter;
 use App\Model\Entity\Repository\GroupRepository;
 use App\Model\Entity\Repository\ProductGroupRepository;
 use App\Model\Entity\Repository\ProductRepository;
 use App\Model\ProductModel;
 use Nette\Application\Application;
+use Nette\Application\UI\Control;
 use Nette\Application\UI\Form;
+use Nette\Application\UI\Presenter;
+use Nette\ComponentModel\IContainer;
 use Nette\Neon\Exception;
 
-class ProductForm implements IProductFormFactory
+class ProductForm extends Control
 {
 
-    /** @param $application Application */
     /** @param $groupRepo GroupRepository */
-    /** @param $productModel ProductModel */
-    public function __construct(Application $application, GroupRepository $groupRepo, ProductModel $productModel)
-    {
+    private $groupRepo;
 
-        $this->application = $application;
+    public function __construct(ProductPresenter $productPresenter, GroupRepository $groupRepo)
+    {
+        parent::__construct($productPresenter, 'ProductForm');
         $this->groupRepo = $groupRepo;
-        $this->productModel = $productModel;
     }
 
+    /**
+     * @return Form
+     */
     public function create()
     {
         $groupsOfProducts = $this->groupRepo->findAll();
@@ -42,30 +47,14 @@ class ProductForm implements IProductFormFactory
 
         $form->addMultiSelect('productGroups', 'Group of Product:', $groups);
 
+//        $form->addUpload('image', 'Image :')
+//            ->setRequired('Please select an image file for product.');
+
         $form->addSubmit('save', 'Create new product');
 
-        $form->onSuccess[] = [$this, 'submitProductFormSucceeded'];
+        $form->onSuccess[] = [$this->presenter, 'submitProductFormSucceeded'];
 
         return $form;
-    }
-
-    public function submitProductFormSucceeded(Form $form, $values)
-    {
-
-        $productId = $this->application->getPresenter()->getParameter('productId');
-        if( $productId )
-        {
-            $this->productModel->updateWithId($productId, $values);
-            $this->application->getPresenter()->flashMessage('Edit Product Succeeded!', 'product_edit_info');
-            $this->application->getPresenter()->redirect("this");
-        }
-        else
-        {
-
-            $this->productModel->addNewProduct($values);
-            $this->application->getPresenter()->flashMessage('Create Product Succeeded!', 'product_new_info');
-            $this->application->getPresenter()->redirect("Product:new");
-        }
     }
 
 }

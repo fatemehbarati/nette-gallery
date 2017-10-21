@@ -4,6 +4,7 @@ namespace App\Model;
 
 use App\Model\Entity\Product;
 use App\Model\Entity\Repository\ProductRepository;
+use Nette\Object;
 
 class ProductModel
 {
@@ -17,6 +18,9 @@ class ProductModel
         $this->groupModel = $groupModel;
     }
 
+    /**
+     * @param $values
+     */
     public function addNewProduct($values)
     {
 
@@ -30,6 +34,9 @@ class ProductModel
         $this->productRepo->add($values, $groups);
     }
 
+    /**
+     * @return array|Product[]
+     */
     public function getProductsInfo()
     {
         $products = $this->productRepo->findAll();
@@ -37,11 +44,19 @@ class ProductModel
         return $products;
     }
 
+    /**
+     * @param $productId
+     * @return null|Object
+     */
     public function getProductWithId($productId)
     {
         return $this->productRepo->find($productId);
     }
 
+    /**
+     * @param $productId
+     * @param $values
+     */
     public function updateWithId($productId, $values)
     {
 

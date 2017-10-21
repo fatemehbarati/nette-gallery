@@ -8,16 +8,13 @@ use Nette\Application\UI\Presenter;
 class SignPresenter extends Presenter
 {
 
-    /** @var SignInForm @inject */
-    public $signInForm;
-
     /**
      * @return Form
      */
     public function createComponentSignInAdmin()
     {
 
-        $form = $this->signInForm->create();
+        $form = (new SignInForm($this))->create();
         return $form;
     }
 

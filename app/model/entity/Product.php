@@ -41,6 +41,11 @@ class Product
     private $created_at;
 
     /**
+     * @ORM\Column(type="string")
+     */
+    private $image;
+
+    /**
      * Many Users have Many Groups.
      * @ORM\ManyToMany(targetEntity="Group", inversedBy="products")
      * @ORM\JoinTable(name="product_group",
@@ -56,10 +61,13 @@ class Product
 
     public function __construct()
     {
-
         $this->groups = new ArrayCollection();
     }
 
+    /**
+     * @param Group $group
+     * @return $this
+     */
     public function addProductGroups(Group $group)
     {
         $this->groups[] = $group;
@@ -147,10 +155,32 @@ class Product
         $this->created_at = $created_at;
     }
 
+    /**
+     * @return string
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param string $image
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+    }
+
+    /**
+     * @return ArrayCollection|Group[]
+     */
     public function getGroups(){
         return $this->groups;
     }
 
+    /**
+     * @param $groups
+     */
     public function setGroups($groups) {
 
         $currentGroups = $this->getGroups();

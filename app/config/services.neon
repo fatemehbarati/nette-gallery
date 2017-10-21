@@ -11,16 +11,23 @@ services:
 	- App\Model\GroupModel
 
 	gallery.repo.product:
-	    class: App\Model\Entity\Repository\ProductRepository
+	    factory: App\Model\Entity\Repository\ProductRepository
 	    tags:
 	        doctrine.repositoryEntity: App\Model\Entity\Product
 
 	gallery.repo.product_group:
-	    class: App\Model\Entity\Repository\ProductGroupRepository
+	    factory: App\Model\Entity\Repository\ProductGroupRepository
 	    tags:
 	        doctrine.repositoryEntity: App\Model\Entity\ProductGroup
 
 	gallery.repo.group:
-	    class: App\Model\Entity\Repository\GroupRepository
+	    factory: App\Model\Entity\Repository\GroupRepository
 	    tags:
 	        doctrine.repositoryEntity: App\Model\Entity\Group
+
+#	gallery.form.product:
+#	    class: App\AdminModule\Forms\ProductForm
+#	    arguments:
+##	        - @Nette\Application\Application
+#	        - @App\Model\Entity\Repository\GroupRepository
+##	        - @App\Model\ProductModel

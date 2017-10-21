@@ -40,7 +40,11 @@ class Group
         $this->products = new ArrayCollection();
     }
 
-    public function addUser(Product $product)
+    /**
+     * @param Product $product
+     * @return $this
+     */
+    public function addProduct(Product $product)
     {
         $this->products[] = $product;
         return $this;
@@ -95,7 +99,7 @@ class Group
     }
 
     /**
-     * @return ArrayCollection
+     * @return ArrayCollection|Product[]
      */
     public function getProducts()
     {
