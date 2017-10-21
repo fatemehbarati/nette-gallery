@@ -24,7 +24,6 @@ class ProductPresenter extends Presenter
     {
 
         $form = (new ProductForm($this, $this->groupRepo))->create();
-
         return $form;
     }
 

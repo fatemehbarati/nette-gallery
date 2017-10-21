@@ -12,7 +12,6 @@ use Nette\Application\Application;
 use Nette\Application\UI\Control;
 use Nette\Application\UI\Form;
 use Nette\Application\UI\Presenter;
-use Nette\ComponentModel\IContainer;
 use Nette\Neon\Exception;
 
 class ProductForm extends Control
@@ -26,12 +25,12 @@ class ProductForm extends Control
         parent::__construct($productPresenter, 'ProductForm');
         $this->groupRepo = $groupRepo;
     }
-
     /**
      * @return Form
      */
     public function create()
     {
+
         $groupsOfProducts = $this->groupRepo->findAll();
 
         foreach ($groupsOfProducts as $groupsOfProduct) {
@@ -56,5 +55,4 @@ class ProductForm extends Control
 
         return $form;
     }
-
 }

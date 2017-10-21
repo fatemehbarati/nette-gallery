@@ -25,9 +25,3 @@ services:
 	    tags:
 	        doctrine.repositoryEntity: App\Model\Entity\Group
 
-#	gallery.form.product:
-#	    class: App\AdminModule\Forms\ProductForm
-#	    arguments:
-##	        - @Nette\Application\Application
-#	        - @App\Model\Entity\Repository\GroupRepository
-##	        - @App\Model\ProductModel
